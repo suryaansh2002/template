@@ -2,7 +2,6 @@ const Users = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const jwt_decode = require("jwt-decode");
-const { JWT_SECRET } = require("../constants");
 const { mailer } = require("../utils/mailer");
 const baseRoute = (req, res) => {
   try {
@@ -66,7 +65,7 @@ const loginRoute = async (req, res) => {
           name: user.name,
           email: user.email,
         },
-        JWT_SECRET
+        process.env.JWT_SECRET
       );
       var payload = jwt_decode(token);
 

@@ -1,19 +1,18 @@
 const nodemailer = require('nodemailer');
-const {EMAIL, APP_PASSWORD}=require('../constants')
 // create reusable transporter object using the default SMTP transport
 const mailer = async(sendTo, subject, content) => {
     try{
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: EMAIL,
-            pass: APP_PASSWORD
+            user: process.env.EMAIL,
+            pass: process.env.APP_PASSWORD
         }
     });
 
     // setup email data
     let mailOptions = {
-        from: EMAIL,
+        from: process.env.EMAIL,
         to: sendTo,
         subject: subject,
         text: content
